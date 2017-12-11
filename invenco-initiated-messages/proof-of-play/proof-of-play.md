@@ -29,7 +29,23 @@
     - partial
 - **siteId** - _required_ - The Invenco name of the site.
 - **terminalId** - _required_ - The id of the terminal at the site.
+- **couponStatus** - _optional_ -  A string that will indicate if the coupon printing was initiated. **Required** if coupon information is available.
+  - Values
+    - 0 - OK
+    - 2 - printer offline
+    - 3 - printer unknown error
+    - 4 - printer over temp
+    - 5 - printer under temp
+    - 6 - printer paper out
+    - 7 - printer paper jammed
+    - 8 - printer cover opened
+    - _N_ - _reason goes here_
+- **couponBarcode** - _optional_ - Used as coupon identifier
 
+> Note:
+> **couponStatus** and **couponBarcode** fields are present **only if** user attempted to print the
+> coupon
+    
 ### Additional Fields in Invenco Error Responses
 - **notificationType** - A string indicating the step in the update process to which this notification refers.
   - Values
@@ -51,7 +67,9 @@
   "endTimestamp": String,
   "screenState": String,
   "siteId": String,
-  "terminalId": String
+  "terminalId": String,
+  "couponStatus": String,
+  "couponBarcode": String
 }
 ```
 

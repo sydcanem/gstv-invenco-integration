@@ -7,6 +7,12 @@ A message is sent when a file has been added to a playlist or a current file in 
 - **filename** - _required_ - Filename - including file extension - of video to control.
 - **checksum** - _required_ - MD5 checksum for the video asset. This value should be used to ensure the correct and full video asset is being downloaded by Invenco.
 - **updatedOn** - _required_ - A UTC date and time that indicates when this update was created. This can be used to ensure updates are applied in the appropriate order. The format will be `YYYY-MM-DD HH:MM:SS.MS` using 24 hour time.
+- **coupon** - _optional_ - An object containing coupon meta data
+  - **title** - _required_ - String - Coupon promotion title ex. "300 Bonus Points"
+  - **detail** - _required_ - String - Coupon description ex. "with Speedy Choice Tube Nuts purchase"
+  - **barcode** - _required_ - String - Coupon barcode number in UPC format (12 digit numeric)
+  - **restriction** - _required_ - String - Coupon restriction ex. "Limit One Per Customer"
+  - **validFrom** - _required_ - String - Coupon validity ex. "Today Only"
 
 ### Additional Fields in Invenco Responses
 - **notificationType** - A string indicating the step in the update process to which this notification refers.
@@ -146,6 +152,32 @@ Return above structure with this specific value for additionalInformation.
 
 ```javascript
   "additionalInformation": "Updated On is Missing"
+```
+
+##### What Invenco Sends if a coupon meta data is missing or invalid
+
+```javascript
+  "additionalInformation": "Coupon Title is Missing"
+```
+
+```javascript
+  "additionalInformation": "Coupon Detail is Missing"
+```
+
+```javascript
+  "additionalInformation": "Coupon Barcode is Missing"
+```
+
+```javascript
+  "additionalInformation": "Coupon Barcode is Incorrectly Formatted"
+```
+
+```javascript
+  "additionalInformation": "Coupon Restriction is Missing"
+```
+
+```javascript
+  "additionalInformation": "Coupon Valid From is Missing"
 ```
 
 ### What Invenco Sends if the Video File in the Media Update can not be Downloaded
